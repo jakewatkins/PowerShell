@@ -1,0 +1,33 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {        
+        "adminUsername": {
+            "value": "vmAdmin"
+        },
+        "adminPassword": {
+            "value": "Ph0ne.Mouse.Paper.Card"
+        },
+        "dnsLabelPrefix": {
+            "value": "jkwvmnet20170420"
+        },
+        "vmName": {
+            "value": "MyVM"
+        },
+        "nicName": {
+            "value": "myVMNic"
+        },
+        "virtualNetworkName": {
+            "value": "MyVNET"
+        },
+        "publicIPAddressName": {
+            "value": "myPublicIP"
+        },
+        "subnetName": {
+            "value": "Subnet"
+        },
+		"windowsOSVersion" : {
+			"value": "2016-Datacenter"
+		}
+   }
+}
