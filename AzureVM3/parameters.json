@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_jkwASControl_name": {
+            "value": null
+        },
+        "virtualMachines_jkwASMaster_name": {
+            "value": null
+        },
+        "virtualMachines_jkwASMirror_name": {
+            "value": null
+        },
+        "networkInterfaces_jkwascontrol37_name": {
+            "value": null
+        },
+        "networkInterfaces_jkwasmaster965_name": {
+            "value": null
+        },
+        "networkInterfaces_jkwasmirror436_name": {
+            "value": null
+        },
+        "networkSecurityGroups_jkwASControl_nsg_name": {
+            "value": null
+        },
+        "networkSecurityGroups_jkwASMaster_nsg_name": {
+            "value": null
+        },
+        "networkSecurityGroups_jkwASMirror_nsg_name": {
+            "value": null
+        },
+        "publicIPAddresses_jkwASControl_ip_name": {
+            "value": null
+        },
+        "publicIPAddresses_jkwASMaster_ip_name": {
+            "value": null
+        },
+        "publicIPAddresses_jkwASMirror_ip_name": {
+            "value": null
+        },
+        "virtualNetworks_jkwCitiArcserve_vnet_name": {
+            "value": null
+        },
+        "storageAccounts_jkwcitiarcservediag811_name": {
+            "value": null
+        },
+        "storageAccounts_jkwcitiarcservedisks899_name": {
+            "value": null
+        }
+    }
+}

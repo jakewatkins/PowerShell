@@ -1,0 +1,515 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_jkwASControl_name": {
+            "defaultValue": "jkwASControl",
+            "type": "String"
+        },
+        "virtualMachines_jkwASMaster_name": {
+            "defaultValue": "jkwASMaster",
+            "type": "String"
+        },
+        "virtualMachines_jkwASMirror_name": {
+            "defaultValue": "jkwASMirror",
+            "type": "String"
+        },
+        "networkInterfaces_jkwascontrol37_name": {
+            "defaultValue": "jkwascontrol37",
+            "type": "String"
+        },
+        "networkInterfaces_jkwasmaster965_name": {
+            "defaultValue": "jkwasmaster965",
+            "type": "String"
+        },
+        "networkInterfaces_jkwasmirror436_name": {
+            "defaultValue": "jkwasmirror436",
+            "type": "String"
+        },
+        "networkSecurityGroups_jkwASControl_nsg_name": {
+            "defaultValue": "jkwASControl-nsg",
+            "type": "String"
+        },
+        "networkSecurityGroups_jkwASMaster_nsg_name": {
+            "defaultValue": "jkwASMaster-nsg",
+            "type": "String"
+        },
+        "networkSecurityGroups_jkwASMirror_nsg_name": {
+            "defaultValue": "jkwASMirror-nsg",
+            "type": "String"
+        },
+        "publicIPAddresses_jkwASControl_ip_name": {
+            "defaultValue": "jkwASControl-ip",
+            "type": "String"
+        },
+        "publicIPAddresses_jkwASMaster_ip_name": {
+            "defaultValue": "jkwASMaster-ip",
+            "type": "String"
+        },
+        "publicIPAddresses_jkwASMirror_ip_name": {
+            "defaultValue": "jkwASMirror-ip",
+            "type": "String"
+        },
+        "virtualNetworks_jkwCitiArcserve_vnet_name": {
+            "defaultValue": "jkwCitiArcserve-vnet",
+            "type": "String"
+        },
+        "storageAccounts_jkwcitiarcservediag811_name": {
+            "defaultValue": "jkwcitiarcservediag811",
+            "type": "String"
+        },
+        "storageAccounts_jkwcitiarcservedisks899_name": {
+            "defaultValue": "jkwcitiarcservedisks899",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Compute/virtualMachines/jkwASControl'.",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_jkwASControl_name')]",
+            "apiVersion": "2016-04-30-preview",
+            "location": "eastus",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS1_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2012-R2-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[parameters('virtualMachines_jkwASControl_name')]",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', parameters('storageAccounts_jkwcitiarcservedisks899_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_jkwASControl_name'),'20170504160349.vhd'))]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_jkwASControl_name')]",
+                    "adminUsername": "vmAdmin",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_jkwascontrol37_name'))]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true,
+                        "storageUri": "[concat('https', '://', parameters('storageAccounts_jkwcitiarcservediag811_name'), '.blob.core.windows.net', '/')]"
+                    }
+                },
+                "licenseType": "Windows_Server"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_jkwcitiarcservedisks899_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_jkwascontrol37_name'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_jkwcitiarcservediag811_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Compute/virtualMachines/jkwASMaster'.",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_jkwASMaster_name')]",
+            "apiVersion": "2016-04-30-preview",
+            "location": "eastus",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS1_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2012-R2-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[parameters('virtualMachines_jkwASMaster_name')]",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', parameters('storageAccounts_jkwcitiarcservedisks899_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_jkwASMaster_name'),'20170504112624.vhd'))]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_jkwASMaster_name')]",
+                    "adminUsername": "vmAdmin",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_jkwasmaster965_name'))]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true,
+                        "storageUri": "[concat('https', '://', parameters('storageAccounts_jkwcitiarcservediag811_name'), '.blob.core.windows.net', '/')]"
+                    }
+                },
+                "licenseType": "Windows_Server"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_jkwcitiarcservedisks899_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_jkwasmaster965_name'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_jkwcitiarcservediag811_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Compute/virtualMachines/jkwASMirror'.",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_jkwASMirror_name')]",
+            "apiVersion": "2016-04-30-preview",
+            "location": "eastus",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS1_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2012-R2-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[parameters('virtualMachines_jkwASMirror_name')]",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', parameters('storageAccounts_jkwcitiarcservedisks899_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_jkwASMirror_name'),'20170504113556.vhd'))]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_jkwASMirror_name')]",
+                    "adminUsername": "vmAdmin",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_jkwasmirror436_name'))]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true,
+                        "storageUri": "[concat('https', '://', parameters('storageAccounts_jkwcitiarcservediag811_name'), '.blob.core.windows.net', '/')]"
+                    }
+                },
+                "licenseType": "Windows_Server"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_jkwcitiarcservedisks899_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_jkwasmirror436_name'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_jkwcitiarcservediag811_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Network/networkInterfaces/jkwascontrol37'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_jkwascontrol37_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.6",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_jkwASControl_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_jkwCitiArcserve_vnet_name')), '/subnets/default')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableIPForwarding": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_jkwASControl_nsg_name'))]"
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_jkwASControl_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_jkwCitiArcserve_vnet_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_jkwASControl_nsg_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Network/networkInterfaces/jkwasmaster965'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_jkwasmaster965_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_jkwASMaster_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_jkwCitiArcserve_vnet_name')), '/subnets/default')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableIPForwarding": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_jkwASMaster_nsg_name'))]"
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_jkwASMaster_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_jkwCitiArcserve_vnet_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_jkwASMaster_nsg_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Network/networkInterfaces/jkwasmirror436'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_jkwasmirror436_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.5",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_jkwASMirror_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_jkwCitiArcserve_vnet_name')), '/subnets/default')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableIPForwarding": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_jkwASMirror_nsg_name'))]"
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_jkwASMirror_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_jkwCitiArcserve_vnet_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_jkwASMirror_nsg_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Network/networkSecurityGroups/jkwASControl-nsg'.",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroups_jkwASControl_nsg_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "default-allow-rdp",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1000,
+                            "direction": "Inbound"
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Network/networkSecurityGroups/jkwASMaster-nsg'.",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroups_jkwASMaster_nsg_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "default-allow-rdp",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1000,
+                            "direction": "Inbound"
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Network/networkSecurityGroups/jkwASMirror-nsg'.",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroups_jkwASMirror_nsg_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "default-allow-rdp",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1000,
+                            "direction": "Inbound"
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Network/publicIPAddresses/jkwASControl-ip'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddresses_jkwASControl_ip_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Network/publicIPAddresses/jkwASMaster-ip'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddresses_jkwASMaster_ip_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Network/publicIPAddresses/jkwASMirror-ip'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddresses_jkwASMirror_ip_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwCitiArcserve/providers/Microsoft.Network/virtualNetworks/jkwCitiArcserve-vnet'.",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_jkwCitiArcserve_vnet_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/24"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24"
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwcitiarcserve/providers/Microsoft.Storage/storageAccounts/jkwcitiarcservediag811'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_jkwcitiarcservediag811_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "eastus",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/ad7d324d-9671-4444-a387-4a6ce01ec23c/resourceGroups/jkwcitiarcserve/providers/Microsoft.Storage/storageAccounts/jkwcitiarcservedisks899'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Premium_LRS",
+                "tier": "Premium"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_jkwcitiarcservedisks899_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "eastus",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        }
+    ]
+}

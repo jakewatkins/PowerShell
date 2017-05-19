@@ -30,9 +30,11 @@ function MakeSeedString
 $seedBlock = MakeSeedString $Size
 write-host $seedBlock.length
 
+$dateTag = (get-date).ToString("yyyyMMdd")
 For($counter = 1; $counter -lt $Files; $counter++)
 {
-	$tmpName = [System.IO.Path]::GetFileNameWithoutExtension([System.IO.Path]::GetTempFileName()) + $counter.ToString() + ".tmp"
+	#$tmpName = [System.IO.Path]::GetFileNameWithoutExtension([System.IO.Path]::GetTempFileName()) + $counter.ToString() + ".tmp"
+	$tmpName = "testFile$dateTag$counter.tmp"
 	$tempFileName = [System.IO.Path]::Combine($Folder, $tmpName)
 	write-host "creating $tempFileName"
 	$seedBlock | out-file $tempFileName
