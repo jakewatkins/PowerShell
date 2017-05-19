@@ -1,0 +1,7 @@
+Web-Server
+NET-Framework-Features
+NET-Framework-45-Features
+MSMQ
+
+For a domain server:
+AD-Domain-Services
