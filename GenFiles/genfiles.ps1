@@ -30,9 +30,13 @@ function MakeSeedString
 $seedBlock = MakeSeedString $Size
 write-host $seedBlock.length
 
+$date = (get-date).ToString("yyyyMMddhhmmss")
+
 For($counter = 1; $counter -lt $Files; $counter++)
 {
-	$tmpName = [System.IO.Path]::GetFileNameWithoutExtension([System.IO.Path]::GetTempFileName()) + $counter.ToString() + ".tmp"
+	#GetTempFileName eventually blows up if you are using a large number of files.  In fact you can only generate 65535 files with it.
+	#$tmpName = [System.IO.Path]::GetFileNameWithoutExtension([System.IO.Path]::GetTempFileName()) + $counter.ToString() + ".tmp"
+	$tmpName = "testFile$date$counter.tmp"
 	$tempFileName = [System.IO.Path]::Combine($Folder, $tmpName)
 	write-host "creating $tempFileName"
 	$seedBlock | out-file $tempFileName
